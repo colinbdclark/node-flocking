@@ -1,0 +1,33 @@
+{
+    "name": "flocking",
+    "description": "Creative audio synthesis for Node.js",
+    "version": "0.1",
+    "author": "Colin Clark",
+    "bugs": "http://github.com/colinbdclark/Flocking/issues",
+    "homepage": "http://flockingjs.org",
+    "dependencies": {
+        "cubeb": ">=0.1.2",
+        "dsp": ">=0.0.2"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        },
+        {
+            "type": "GPL",
+            "url": "http://opensource.org/licenses/GPL-3.0"
+        }
+    ],
+    "keywords": [
+        "sound", 
+        "audio", 
+        "music", 
+        "synthesis"
+    ],
+    "repository": "git://github.com/colinbdclark/Flocking.git",
+    "main": "index.js",
+    "engines": {
+        "node" : "0.8.x" 
+    }
+}
