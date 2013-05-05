@@ -6,7 +6,8 @@
     "bugs": "http://github.com/colinbdclark/Flocking/issues",
     "homepage": "http://flockingjs.org",
     "dependencies": {
-        "cubeb": ">=0.1.2",
+        "infusion": "git://github.com/fluid-project/infusion.git",
+        "speaker": ">=0.0.9",
         "dsp": ">=0.0.2"
     },
     "licenses": [
