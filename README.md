@@ -1,7 +1,7 @@
 What is Flocking and node-flocking?
 ===================================
 
-**node-flocking** is a Node.js module for [Flocking](http://flockingjs.org). It's an early work in progress, but it has been tested on both Mac OS X and on Debian Linux running on a Raspberry Pi.
+**node-flocking** is a Node.js module for [Flocking](http://flockingjs.org). It's an early work in progress, and has been tested only on Mac OS X.
 
 **Flocking** is an audio synthesis toolkit for JavaScript. It runs in a browser (Firefox, Chrome, or Safari) or directly on your computer (using Node.js). It doesn't require Flash or any other proprietary plugins. Written entirely in JavaScript, Flocking is designed for artists and musicians building creative Web-based sound projects.
 
