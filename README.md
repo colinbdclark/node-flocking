@@ -22,13 +22,9 @@ Flocking in Node.js is still very raw, so the installation process is rather awk
 
 ### By hand:
 2. Clone node-flocking
-3. Clone [flocking](https://github.com/colinbdclark/Flocking) into node-flocking: "git clone git://github.com/colinbdclark/Flocking.git flocking"
-4. Check out the infusion branch of flocking: "git checkout infusion" 
-5. Install node module dependencies: "npm install speaker dsp git://github.com/fluid-project/infusion.git"
-6. Test it with "node index.js"
+3. npm install
+3. Test it with "node index.js"
 
 ### With npm:
 2. Install node-flocking via npm from the repo: "npm install git://github.com/colinbdclark/node-flocking.git"
-3. Clone [flocking](https://github.com/colinbdclark/Flocking) into node_modules/node-flocking: "git clone git://github.com/colinbdclark/Flocking.git flocking"
-4. Check out the infusion branch of flocking "git checkout infusion"
-5. Test it with "node index.js"
+3. Test it with "node index.js"

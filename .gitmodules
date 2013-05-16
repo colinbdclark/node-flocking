@@ -1,0 +1,3 @@
+[submodule "flocking"]
+	path = flocking
+	url = git://github.com/colinbdclark/Flocking.git
