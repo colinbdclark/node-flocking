@@ -9,6 +9,13 @@ loader.require("../flocking/flocking/flocking-ugens.js");
 
 flock = fluid.registerNamespace("flock");
 
+flock.init({
+    bufferSize: 128,
+    rates: {
+        audio: 22050
+    }
+});
+
 var synth = flock.synth({
     id: "noise-sine-synth",
     synthDef: {

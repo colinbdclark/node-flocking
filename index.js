@@ -12,7 +12,10 @@ loader.require("./tests/test-synth.js")
 var flock = fluid.registerNamespace("flock");
 
 flock.init({
-    bufferSize: 1024
+    bufferSize: 128,
+    rates: {
+        audio: 22050
+    }
 });
 
 var synth = flock.demo.nodeTest();
