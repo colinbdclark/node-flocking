@@ -18,7 +18,7 @@ var fs = require("fs"),
 (function () {
     "use strict";
 
-    var Speaker = require("speaker");
+    var alsa = require("alsa");
     var Readable = require("stream").Readable;
     
     /*********************************************************
@@ -161,7 +161,14 @@ var fs = require("fs"),
             
             m.numBlockBytes = audioSettings.blockSize * audioSettings.chans * 4; // Flocking uses Float32s, hence * 4
             m.pushRate = (bufSize / rates.audio) * 1000;
-            that.speaker = new Speaker();
+            that.speaker = new alsa.Playback(
+                "default", 
+                2, 
+                audioSettings.rates.audio, 
+                alsa.FORMAT_FLOAT_LE, 
+                alsa.ACCESS_RW_INTERLEAVED, 
+                1000 // TODO: Hardcoded ALSA latency value.
+            );
             that.outputStream = flock.enviro.nodejs.setupOutputStream(audioSettings);
             that.silence = flock.generate.silence(new Buffer(m.numBlockBytes));
         };
@@ -170,17 +177,8 @@ var fs = require("fs"),
     };
     
     flock.enviro.nodejs.setupOutputStream = function (audioSettings) {
-        var outputStream = new Readable({
-            highWaterMark: audioSettings.bufferSize * audioSettings.chans * 4
-        });
-        
-        outputStream.bitDepth = 32;
-        outputStream.float = true
-        outputStream.signed = true;
-        outputStream.channels = audioSettings.chans;
-        outputStream.sampleRate = audioSettings.rates.audio;
-        outputStream.samplesPerFrame = audioSettings.bufferSize;
-        
+        var outputStream = new Readable();
+ 
         return outputStream;
     };
     

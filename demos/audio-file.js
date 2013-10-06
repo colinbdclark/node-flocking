@@ -11,6 +11,14 @@ loader.require("../flocking/flocking/flocking-ugens.js");
 
 flock = fluid.registerNamespace("flock");
 
+flock.init({
+    rates: {
+        audio: 44100
+    },
+
+    bufferSize: 128
+});
+
 var synth = flock.synth({
     synthDef: {
         ugen: "flock.ugen.playBuffer",
