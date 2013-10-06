@@ -5,7 +5,7 @@
     "author": "Colin Clark",
     "bugs": "http://github.com/colinbdclark/Flocking/issues",
     "homepage": "http://flockingjs.org",
-	"scripts" : { "preinstall" : "git submodule update --init" },
+	"scripts" : { "preinstall" : "git submodule update --init; cd flocking; git submodule update --init" },
     "dependencies": {
         "infusion": "git://github.com/fluid-project/infusion.git",
         "speaker": "git://github.com/TooTallNate/node-speaker.git",
