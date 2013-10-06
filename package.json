@@ -8,8 +8,8 @@
 	"scripts" : { "preinstall" : "git submodule update --init" },
     "dependencies": {
         "infusion": "git://github.com/fluid-project/infusion.git",
-        "speaker": ">=0.0.9",
-        "dsp": ">=0.0.2"
+        "speaker": "git://github.com/TooTallNate/node-speaker.git",
+        "dspapi": "git://github.com/colinbdclark/node-dsp.git"
     },
     "licenses": [
         {
