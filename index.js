@@ -4,6 +4,7 @@ var fluid = require("infusion"),
 
 loader.require("./flocking/third-party/polydataview/js/polydataview.js");
 loader.require("./flocking/flocking/flocking-core.js");
+loader.require("./flocking/flocking/flocking-buffers.js");
 loader.require("./flocking/flocking/flocking-audiofile.js");
 loader.require("./flocking/flocking/flocking-scheduler.js");
 loader.require("./flocking-node.js");
