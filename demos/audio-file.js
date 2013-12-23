@@ -3,11 +3,10 @@ var fluid = require("infusion"),
     flock = require(__dirname + "/../index.js");
 
 flock.init({
+    bufferSize: 64,
     rates: {
         audio: 44100
-    },
-
-    bufferSize: 128
+    }
 });
 
 var synth = flock.synth({

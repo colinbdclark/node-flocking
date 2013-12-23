@@ -3,9 +3,9 @@ var fluid = require("infusion"),
     loader = fluid.getLoader(__dirname);
 
 flock.init({
-    bufferSize: 128,
+    bufferSize: 64,
     rates: {
-        audio: 22050
+        audio: 44100 
     }
 });
 

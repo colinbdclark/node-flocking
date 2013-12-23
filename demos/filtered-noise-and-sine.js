@@ -3,9 +3,9 @@ var fluid = require("infusion"),
     flock = require(__dirname + "/../index.js");
 
 flock.init({
-    bufferSize: 128,
+    bufferSize: 64,
     rates: {
-        audio: 22050
+        audio: 44100
     }
 });
 

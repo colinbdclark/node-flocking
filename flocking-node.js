@@ -97,7 +97,12 @@ var fs = require("fs"),
     fluid.registerNamespace("flock.enviro");
     
     fluid.defaults("flock.enviro.nodejs", {
-        gradeNames: ["flock.enviro.audioStrategy", "autoInit"]
+        gradeNames: ["flock.enviro.audioStrategy", "autoInit"],
+        
+        format: alsa.FORMAT_FLOAT_LE,
+        numSampleBytes: 4,
+        device: "pcm.float",
+        latency: 750
     });
     
     flock.enviro.nodejs.finalInit = function (that) {
@@ -107,34 +112,39 @@ var fs = require("fs"),
         };
 
         that.pushSamples = function () {
-            var audioSettings = that.options.audioSettings,
+            var o = that.options,
+                audioSettings = o.audioSettings,
+                numSampleBytes = o.numSampleBytes,
                 m = that.model,
+                numBlockBytes = m.numBlockBytes,
                 playState = m.playState,
                 blockSize = audioSettings.blockSize,
                 chans = audioSettings.chans,
+                outputStream = that.outputStream,
+                nodeEvaluator = that.nodeEvaluator,
                 more = true,
                 out;
             
             if (that.nodeEvaluator.nodes.length < 1) {
                 // If there are no nodes providing samples, write out silence.
                 while (more) {
-                    more = that.outputStream.push(that.silence);
+                    more = outputStream.push(that.silence);
                 }
             } else {
                 while (more) {
-                    that.nodeEvaluator.gen();
-                    out = new Buffer(m.numBlockBytes);
+                    nodeEvaluator.gen();
+                    out = new Buffer(numBlockBytes);
                     
                     // Interleave each output channel.
                     for (var chan = 0; chan < chans; chan++) {
-                        var bus = that.nodeEvaluator.buses[chan];
+                        var bus = nodeEvaluator.buses[chan];
                         for (var sampIdx = 0; sampIdx < blockSize; sampIdx++) {
                             var frameIdx = sampIdx * chans;
-                            out.writeFloatLE(bus[sampIdx], (frameIdx + chan) * 4);
+                            out.writeFloatLE(bus[sampIdx], (frameIdx + chan) * numSampleBytes);
                         }
                     }
 
-                    more = that.outputStream.push(out);
+                    more = outputStream.push(out);
                 }
             }
 
@@ -154,20 +164,21 @@ var fs = require("fs"),
         };
         
         that.init = function () {
-            var audioSettings = that.options.audioSettings,
+            var o = that.options,
+                audioSettings = o.audioSettings,
                 rates = audioSettings.rates,
                 bufSize = audioSettings.bufferSize,
                 m = that.model;
             
-            m.numBlockBytes = audioSettings.blockSize * audioSettings.chans * 4; // Flocking uses Float32s, hence * 4
+            m.numBlockBytes = audioSettings.blockSize * audioSettings.chans * o.numSampleBytes;
             m.pushRate = (bufSize / rates.audio) * 1000;
             that.speaker = new alsa.Playback(
-                "default", 
-                2, 
+                o.device, 
+                audioSettings.chans, 
                 audioSettings.rates.audio, 
-                alsa.FORMAT_FLOAT_LE, 
+                o.format, 
                 alsa.ACCESS_RW_INTERLEAVED, 
-                1000 // TODO: Hardcoded ALSA latency value.
+                o.latency
             );
             that.outputStream = flock.enviro.nodejs.setupOutputStream(audioSettings);
             that.silence = flock.generate.silence(new Buffer(m.numBlockBytes));
