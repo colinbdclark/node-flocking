@@ -28,7 +28,7 @@
         "synthesis"
     ],
     "repository": "git://github.com/colinbdclark/Flocking.git",
-    "main": "index.js",
+    "main": "nodejs/index.js",
     "engines": {
         "node" : "0.10.x"
     }
